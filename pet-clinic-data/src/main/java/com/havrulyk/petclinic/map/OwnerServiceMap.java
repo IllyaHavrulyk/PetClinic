@@ -1,10 +1,11 @@
 package com.havrulyk.petclinic.map;
 
 import com.havrulyk.petclinic.model.Owner;
-import com.havrulyk.petclinic.services.CrudService;
+import com.havrulyk.petclinic.services.OwnerService;
+
 import java.util.Set;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements CrudService<Owner, Long> {
+public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Owner save(Owner entity) {
         return super.save(entity.getId(), entity);
@@ -28,5 +29,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     @Override
     public Owner findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Owner findByLastname(String lastName) {
+        return null;
     }
 }

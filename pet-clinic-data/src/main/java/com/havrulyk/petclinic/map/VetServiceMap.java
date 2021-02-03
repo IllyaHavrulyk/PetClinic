@@ -2,9 +2,11 @@ package com.havrulyk.petclinic.map;
 
 import com.havrulyk.petclinic.model.Vet;
 import com.havrulyk.petclinic.services.CrudService;
+import com.havrulyk.petclinic.services.VetService;
+
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService{
     @Override
     public Vet save(Vet entity) {
         return super.save(entity.getId(), entity);
