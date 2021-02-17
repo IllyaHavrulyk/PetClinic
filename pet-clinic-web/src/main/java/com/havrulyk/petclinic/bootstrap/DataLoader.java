@@ -10,29 +10,30 @@ import com.havrulyk.petclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class DataLoader implements CommandLineRunner {
-    private final OwnerService ownerService;
-    private final VetService vetService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
-    }
+  private final OwnerService ownerService;
+  private final VetService vetService;
 
-    @Override
-    public void run(String... args) throws Exception {
-        Owner borisJohnson = new Owner(Long.valueOf(12345),"Boris", "Johnson");
-        Owner michaelAnisimov = new Owner(Long.valueOf(12346),"Michael", "Anisimov");
-        ownerService.save(borisJohnson);
-        ownerService.save(michaelAnisimov);
-        System.out.println("Saved owners....");
+  public DataLoader() {
+    ownerService = new OwnerServiceMap();
+    vetService = new VetServiceMap();
+  }
 
-        Vet karimArabi = new Vet(Long.valueOf(21353),"Karim", "Arabi");
-        Vet chingChong = new Vet(Long.valueOf(21353),"Ching", "Chong");
-        vetService.save(karimArabi);
-        vetService.save(chingChong);
-        System.out.println("Saved vets....");
-    }
+  @Override
+  public void run(String... args) throws Exception {
+    Owner borisJohnson = new Owner(Long.valueOf(12345), "Boris", "Johnson");
+    Owner michaelAnisimov = new Owner(Long.valueOf(12346), "Michael", "Anisimov");
+    ownerService.save(borisJohnson);
+    ownerService.save(michaelAnisimov);
+    System.out.println(ownerService.findAll().toString());
+    System.out.println("Saved owners....");
+
+    Vet karimArabi = new Vet(Long.valueOf(21353), "Karim", "Arabi");
+    Vet chingChong = new Vet(Long.valueOf(21353), "Ching", "Chong");
+    vetService.save(karimArabi);
+    vetService.save(chingChong);
+    System.out.println("Saved vets....");
+  }
 }
