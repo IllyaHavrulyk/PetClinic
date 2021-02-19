@@ -9,4 +9,14 @@ public class IndexController {
   public String index(){
     return "index";
   }
+
+  @RequestMapping({"/oups"})
+  public String oups() {
+    return "notimplemented";
+  }
+
+  @RequestMapping({"/vets.html"})
+  public String vets(){
+    return "notimplemented";
+  }
 }

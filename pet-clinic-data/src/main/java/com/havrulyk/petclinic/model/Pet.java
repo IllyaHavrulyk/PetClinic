@@ -1,8 +1,37 @@
 package com.havrulyk.petclinic.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class Pet extends BaseEntity{
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "pets")
+public class Pet extends BaseEntity {
+
+  @Column(name = "name")
+  private String name;
+  @ManyToOne
+  @JoinColumn(name = "type_id")
+  private PetType petType;
+  @ManyToOne
+  @JoinColumn(name = "owner_id")
+  private Owner owner;
+  private LocalDate birthDate;
+
   public Pet(Long id, PetType petType, Owner owner, LocalDate birthDate) {
     super(id);
     this.petType = petType;
@@ -10,31 +39,22 @@ public class Pet extends BaseEntity{
     this.birthDate = birthDate;
   }
 
-  private PetType petType;
-  private Owner owner;
-  private LocalDate birthDate;
-
-  public PetType getPetType() {
-    return petType;
-  }
-
-  public void setPetType(PetType petType) {
+  public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDate) {
+    super(id);
+    this.name = name;
     this.petType = petType;
-  }
-
-  public Owner getOwner() {
-    return owner;
-  }
-
-  public void setOwner(Owner owner) {
     this.owner = owner;
-  }
-
-  public LocalDate getBirthDate() {
-    return birthDate;
-  }
-
-  public void setBirthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
   }
+
+  public Pet(String name, PetType petType, Owner owner, LocalDate birthDate) {
+    this.name = name;
+    this.petType = petType;
+    this.owner = owner;
+    this.birthDate = birthDate;
+  }
+
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+  private Set<Visit> visits = new HashSet<>();
 }
